@@ -54,6 +54,17 @@ const TodoPage = () => {
         }
     };
 
+    const handleDelete = async (id) => {
+        if (!window.confirm('Are you sure you want to delete this task?')) return;
+
+        try {
+            await axios.delete(`${environment.API_URL}api/to-do/${id}`);
+            setTodos((prev) => prev.filter((t) => t.Id !== id));
+        } catch (err) {
+            console.error('Failed to delete task:', err);
+        }
+    };
+
     useEffect(() => {
         fetchTodos();
     }, [date]);
@@ -168,6 +179,7 @@ const TodoPage = () => {
                                                         <TodoItem
                                                             todo={todo}
                                                             onToggleComplete={handleToggleComplete}
+                                                            onDelete={handleDelete}
                                                             onEdit={() => {
                                                                 setSelectedTodo(todo);
                                                                 setMode('edit');
