@@ -1,0 +1,7 @@
+bin
+obj
+appsettings.json
+appsettings.Development.json
+appsettings.Production.json
+package-lock.json
+*.db*
